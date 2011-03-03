@@ -1,0 +1,40 @@
+
+Taglist (for jQuery)
+version: 0.1 (3/1/2010)
+@requires jQuery v1.4 or later
+
+Examples at http://jeffrafter.github.com/jquery.taglist
+
+Licensed under the MIT:
+  http://www.opensource.org/licenses/mit-license.php
+
+Copyright 2011 Jeff Rafter
+
+Input resizing based on http://jsbin.com/ahaxe
+
+Makes an editable taglist that adds items as blocks
+
+Usage:
+
+ <div class="container">
+   <div class="taglist"></div>
+ </div> 
+
+ <script type="text/javascript">
+   $('div.taglist').taglist([], {
+     className: 'tag', // default: tag
+     onAdd: function(tag) {},
+     onRemove: function(tag) {},
+     onProcess: function(tag) {}
+   })
+ </script>
+
+Available options:
+
+  className: the class that should be used for each new tag in the list
+
+  prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
+
+  inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
+
+

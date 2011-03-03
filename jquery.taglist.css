@@ -1,0 +1,47 @@
+.taglist {
+  padding: 4px;
+  line-height: 29px;
+  white-space: normal !important;
+}
+.taglist a.tag {
+  background: #282828;
+  padding: 4px;
+  margin-left: 1px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  -moz-border-radius: 3px; 
+  -webkit-border-radius: 3px; 
+  border-radius: 3px;
+}
+.taglist a.tag span {
+  white-space: nowrap;
+}
+.taglist a.tag span.tagname {
+  color: #B5B2AC;
+}
+.taglist a.tag span.tagclose {
+  font-size:10px;
+  font-weight: bold;
+  background: #C3C3C3;
+  color: #454545;
+  vertical-align: text-top;
+  margin-left: 6px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left:3px;
+  padding-right:3px;
+  height: 10px;
+  line-height: 16px;
+  width: 14px;
+  -moz-border-radius: 2px; 
+  -webkit-border-radius: 2px; 
+  border-radius: 2px;
+}
+.taglist input {
+  border: none;
+  outline: none; 
+  font-size: 1em;
+}
+

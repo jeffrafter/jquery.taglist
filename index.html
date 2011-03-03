@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sample JQuery TagList</title>
+    <style type="text/css">
+      body {
+        font-family:HelveticaNeue,Helvetica,Arial,sans-serif;
+      }
+      #taglist {
+        width: 430px;
+        height: 200px;
+        border: 1px solid silver;
+      }
+    </style>
+    <link rel="stylesheet" href="./jquery.taglist.css">
+  </head>
+  <body>
+
+    <h1>Taglist (for jQuery)</h1>
+    <div id="taglist" class="taglist" data-tags=""></div>
+
+    <pre>
+ * version: 0.1 (3/1/2010)
+ * @requires jQuery v1.4 or later
+ *
+ * Examples at http://jeffrafter.github.com/jquery.taglist
+ *
+ * Licensed under the MIT:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2011 Jeff Rafter
+ *
+ * Input resizing based on http://jsbin.com/ahaxe
+ *
+ * Makes an editable taglist that adds items as blocks
+ *
+ * Usage:
+ *
+ *  &lt;div class="container"&gt;
+ *     &lt;div class="taglist"&gt;&lt;/div&gt;
+ *   &lt;/div&gt; 
+ *
+ *  &lt;script type="text/javascript"&gt;
+ *    $('div.taglist').taglist([], {
+ *      className: 'tag', // default: tag
+ *      onAdd: function(tag) {},
+ *      onRemove: function(tag) {},
+ *      onProcess: function(tag) {}
+ *    })
+ *   &lt;/script&gt;
+ *
+ * Available options:
+ *
+ *   className: the class that should be used for each new tag in the list
+ *
+ *   prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
+ *
+ *   inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
+ *
+ </pre>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="./jquery.taglist.js?1=1"></script>
+    <script>
+      jQuery(document).ready(function($) {
+        $('div.taglist').taglist(['The first tag', 'The second tag', 'Third tags a charm', 'Even more tags']);
+      })
+    </script>
+  </body>
+</html>
