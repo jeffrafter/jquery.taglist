@@ -1,6 +1,6 @@
 /*
  * Taglist (for jQuery)
- * version: 0.2 (3/3/2010)
+ * version: 0.3 (3/3/2010)
  * @requires jQuery v1.4 or later
  *
  * Examples at http://jeffrafter.github.com/jquery.taglist
@@ -37,6 +37,8 @@
  *
  *   inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
  *
+ *   keyCodes: a list of key codes that trigger tag processing. For example, [188, 0] are the keyCodes for "," and " " respectively
+ *
  */
 (function($) {
   var defaults = {
@@ -46,6 +48,7 @@
     onRemove: null,
     onProcess: null,
     prefixUrl: null,
+    keyCodes: [188, 32]
   };
 
   var Taglist = function(container, userTags, userOptions) {
@@ -119,6 +122,13 @@
             input.val('');
             input.blur();
             break;
+        }
+        if (options.keyCodes) {
+          if (options.keyCodes.indexOf(event.which) > -1) {
+            self.processTag(input.val());
+            input.val('');
+            event.preventDefault();
+          }
         }
       });
 
