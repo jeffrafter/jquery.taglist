@@ -81,14 +81,6 @@
         whiteSpace: 'nowrap'
       });
 
-      tagTest = $("<div class='taglist'><a class='" + options.className + "><span class='tagname'></span></a></div>").find('span').css({
-        position: 'absolute',
-        top: -9999,
-        left: -9999,
-        width: 'auto',
-        whiteSpace: 'nowrap'
-      });
-
       $.each(userTags, function(i, t) {
         self.addTag(t);
       });
@@ -98,6 +90,9 @@
 
         // Enter new content into testSubject
         var escaped = inputVal.replace(/&/g, '&amp;').replace(/\s/g,'&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        // Sometimes this gets stuck
+        inputTest.width(0);
+        inputTest.width('auto');
         inputTest.html(escaped);
 
         // Calculate new width + whether to change
@@ -105,8 +100,6 @@
             newWidth = inputTestWidth + inputComfort,
             currentWidth = input.width(),
             isValidWidthChange = (newWidth < currentWidth && newWidth >= 0) || (newWidth > currentWidth && newWidth < inputMaxWidth);
-
-        // Animate width
         if (isValidWidthChange) input.width(newWidth);
       };
 
@@ -146,22 +139,22 @@
       if (tag == '') return;
       if (tags.indexOf(tag) > -1) return;
       tags.push(tag);
+      var el = $("<a class='" + 
+        options.className + "' href='" + 
+        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + tag +"'>"+
+        "<span class='tagclose'>&#x2715;</span>"+
+        "<span class='tagname'>"+tag+"</span>"+
+        "</a><span> </span>").insertBefore(input);
       // Check for ellipsis adjustment
       var elided = 0;
       var abbrev = tag;
-      tagTest.html(abbrev);
+      tagTest = el.find('span.tagname');
       while (true) {
-        if (tagTest.width() <= inputMaxWidth-inputComfort-40) break;
+        if (tagTest.width() <= inputMaxWidth-inputComfort-10) break;
         if (elided >= tag.length) break;
         abbrev = tag.slice(0, tag.length-elided++)+'&hellip;';
         tagTest.html(abbrev);
       }
-      var el = $("<a class='" + 
-        options.className + "' href='" + 
-        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + tag +"'>"+
-        "<span class='tagname'>"+abbrev+"</span>"+
-        "<span class='tagclose'>&#x2715;</span>"+
-        "</a><span> </span>").insertBefore(input);
       el.find('span.tagclose').click(function(event) {
         self.removeTag(el.attr('title'));
       });
