@@ -61,6 +61,7 @@
     var inputVal      = null;
     var inputTest     = null;
     var input         = inputSpan.find('input');
+    var tagTest       = null;
 
     var init = function() {
       container.empty().append(input);
@@ -79,6 +80,19 @@
         letterSpacing: input.css('letterSpacing'),
         whiteSpace: 'nowrap'
       });
+
+      tagTest = $("<div class='taglist'><a class='" + options.className + "><span class='tagname'></span></a></div>").find('span').css({
+        position: 'absolute',
+        top: -9999,
+        left: -9999,
+        width: 'auto',
+        whiteSpace: 'nowrap'
+      });
+
+      $.each(userTags, function(i, t) {
+        self.addTag(t);
+      });
+
       inputCheck = function() {
         if (inputVal === (inputVal = input.val())) {return;}
 
@@ -126,19 +140,26 @@
       inputCheck();
     }
 
-    // Get things started
-    init();
-
     this.addTag = function(tag) {
       // Trim the string, we don't want leading and trailing spaces
       tag = tag.replace(/^\s*/, '').replace(/\s*$/, '');
       if (tag == '') return;
       if (tags.indexOf(tag) > -1) return;
       tags.push(tag);
+      // Check for ellipsis adjustment
+      var elided = 0;
+      var abbrev = tag;
+      tagTest.html(abbrev);
+      while (true) {
+        if (tagTest.width() <= inputMaxWidth-inputComfort-40) break;
+        if (elided >= tag.length) break;
+        abbrev = tag.slice(0, tag.length-elided++)+'&hellip;';
+        tagTest.html(abbrev);
+      }
       var el = $("<a class='" + 
         options.className + "' href='" + 
         options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + tag +"'>"+
-        "<span class='tagname'>"+tag+"</span>"+
+        "<span class='tagname'>"+abbrev+"</span>"+
         "<span class='tagclose'>&#x2715;</span>"+
         "</a><span> </span>").insertBefore(input);
       el.find('span.tagclose').click(function(event) {
@@ -163,10 +184,10 @@
       return self.addTag(tag);
     }
 
-    $.each(userTags, function(i, t) {
-      self.addTag(t);
-    });
-   };
+    // Get things started
+    init();
+
+  };
 
   $.fn.taglist = function(tags, options) {
     $.each(this, function(i, e) {

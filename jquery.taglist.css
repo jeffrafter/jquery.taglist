@@ -1,9 +1,10 @@
 .taglist {
   padding: 4px;
   line-height: 29px;
-  white-space: normal !important;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
-.taglist a.tag {
+.taglist a {
   background: #282828;
   padding: 4px;
   margin-left: 1px;
@@ -15,13 +16,16 @@
   -webkit-border-radius: 3px; 
   border-radius: 3px;
 }
-.taglist a.tag span {
+.taglist a span {
   white-space: nowrap;
 }
-.taglist a.tag span.tagname {
+.taglist a span.tagname {
   color: #B5B2AC;
 }
-.taglist a.tag span.tagclose {
+.taglist a:hover span.tagname {
+  color: #E5E5E3;
+}
+.taglist a span.tagclose {
   font-size:10px;
   font-weight: bold;
   background: #C3C3C3;
@@ -38,6 +42,9 @@
   -moz-border-radius: 2px; 
   -webkit-border-radius: 2px; 
   border-radius: 2px;
+}
+.taglist a span.tagclose:hover {
+  background: #E5E5E3;
 }
 .taglist input {
   border: none;
