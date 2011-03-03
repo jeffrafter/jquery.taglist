@@ -27,7 +27,14 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
+    #taglist {
+      width: 430px;
+      height: 200px;
+      border: 1px solid silver;
+      background: white;
+    }
   </style>
+  <link rel="stylesheet" href="https://github.com/jeffrafter/jquery.taglist/raw/master/jquery.taglist.css">
 </head>
 
 <body>
@@ -48,33 +55,26 @@
     <div class="description">
       Simple tag list editor that converts the tags to blocks as you type
     </div>
-
+    <h2>Example</h2>
+    <div id="taglist" class="taglist" data-tags=""></div>
     <h2>Dependencies</h2>
 <p>JQuery 1.4+</p>
-<h2>Install</h2>
-<p> * Usage:
+<h2>Usage</h2>
+<pre>
  *
- *  <div class="container">
-      <div class="taglist"></div>
- *  </div> 
+ *  &lt;div class="container"&gt;
+ *     &lt;div class="taglist"&gt;&lt;/div&gt;
+ *   &lt;/div&gt; 
  *
- *  <script type="text/javascript">
+ *  &lt;script type="text/javascript"&gt;
  *    $('div.taglist').taglist([], {
  *      className: 'tag', // default: tag
  *      onAdd: function(tag) {},
  *      onRemove: function(tag) {},
  *      onProcess: function(tag) {}
  *    })
- *  </script>
- *
- * Available options:
- *
- *   className: the class that should be used for each new tag in the list
- *
- *   prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
- *
- *   inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
- *</p>
+ *   &lt;/script&gt; *
+</pre>
 <h2>License</h2>
 <p>MIT License, http://www.opensource.org/licenses/mit-license.php
 </p>
@@ -100,6 +100,14 @@
     </div>
 
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script src="https://github.com/jeffrafter/jquery.taglist/raw/master/jquery.taglist.js"></script>
+  <script>
+      jQuery(document).ready(function($) {
+        $('div.taglist').taglist(['The first tag', 'The second tag', 'Third tags a charm', 'Even more tags']);
+      })
+  </script>
+
 
   
 </body>
