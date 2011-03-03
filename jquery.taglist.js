@@ -1,6 +1,6 @@
 /*
  * Taglist (for jQuery)
- * version: 0.1 (3/1/2010)
+ * version: 0.2 (3/3/2010)
  * @requires jQuery v1.4 or later
  *
  * Examples at http://jeffrafter.github.com/jquery.taglist
@@ -115,6 +115,12 @@
         }
       });
 
+      input.blur(function(event) {
+        if (input.val() == '') return;
+        self.processTag(input.val());
+        input.val('');
+      });
+
       inputTest.insertAfter(input);
       input.bind('keyup keydown blur update', inputCheck);
       inputCheck();
@@ -131,10 +137,13 @@
       tags.push(tag);
       var el = $("<a class='" + 
         options.className + "' href='" + 
-        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' data-tag='" + tag +"'>"+
+        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + tag +"'>"+
         "<span class='tagname'>"+tag+"</span>"+
         "<span class='tagclose'>&#x2715;</span>"+
         "</a><span> </span>").insertBefore(input);
+      el.find('span.tagclose').click(function(event) {
+        self.removeTag(el.attr('title'));
+      });
       if (options.onAdd) options.onAdd.apply(self, [tag]);
       return el;
     };
@@ -143,7 +152,7 @@
       tag = tag.replace(/^\s*/, '').replace(/\s*$/, '');
       if (tag == '') return;
       if (tags.indexOf(tag) == -1) return;
-      var el = container.find('a[data-tag='+tag+']').remove();
+      var el = container.find('a[title='+tag+']').remove();
       tags.splice(tags.indexOf(tag), 1);
       if (options.onRemove) options.onRemove.apply(self, [tag]);
       return el;
