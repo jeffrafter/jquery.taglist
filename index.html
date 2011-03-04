@@ -80,6 +80,8 @@
 <pre>
   $('input.taglist').taglist([], {keyCodes: null, delimiter: null})
 </pre>
+<h4>Example</h4>
+<input id="longtaglist" name="longtaglist" class="taglist" value="This is a much longer tag" style="display:none" />
 <p>
   Additionally, jquery.taglist has several callbacks for you to handle things how you want:
 </p>
@@ -119,11 +121,10 @@
 <script src="https://github.com/jeffrafter/jquery.taglist/raw/master/jquery.taglist.js"></script>
 <script>
   jQuery(document).ready(function($) {
-    $('input.taglist').taglist([], {});
+    $('#taglist').taglist([], {});
+    $('#longtaglist').taglist([], {keyCodes: null, delimiter: null})
   })
 </script>
 
-
-  
 </body>
 </html>
