@@ -27,7 +27,7 @@
     pre { background: #000; color: #fff; padding: 15px;}
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
-    #taglist {
+    .taglist {
       width: 430px;
       height: 200px;
       border: 1px solid silver;
@@ -38,70 +38,68 @@
 </head>
 
 <body>
-  <a href="http://github.com/jeffrafter/jquery.taglist"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+<a href="http://github.com/jeffrafter/jquery.taglist"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+<div id="container">
 
-    <div class="download">
-      <a href="http://github.com/jeffrafter/jquery.taglist/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/jeffrafter/jquery.taglist/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+<div class="download">
+  <a href="http://github.com/jeffrafter/jquery.taglist/zipball/master">
+    <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+  <a href="http://github.com/jeffrafter/jquery.taglist/tarball/master">
+    <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+</div>
 
-    <h1><a href="http://github.com/jeffrafter/jquery.taglist">jquery.taglist</a>
-      <span class="small">by <a href="http://github.com/jeffrafter">jeffrafter</a></span></h1>
+<h1><a href="http://github.com/jeffrafter/jquery.taglist">jquery.taglist</a>
+  <span class="small">by <a href="http://github.com/jeffrafter">jeffrafter</a></span></h1>
 
-    <div class="description">
-      Simple tag list editor that converts the tags to blocks as you type
-    </div>
-    <h2>Example</h2>
-    <div id="taglist" class="taglist" data-tags=""></div>
-    <h2>Dependencies</h2>
+<div class="description">
+  Simple tag list editor that converts the tags to blocks as you type
+</div>
+<h2>Example</h2>
+<input id="taglist" name="taglist" class="taglist" value="JavaScript jQuery tags editor" style="display:none" />
+<h2>Dependencies</h2>
 <p>JQuery 1.4+</p>
 <h2>Basic Usage</h2>
 <pre>
-  &lt;div class="container"&gt;
-    &lt;div class="taglist"&gt;&lt;/div&gt;
-  &lt;/div&gt; 
+   &lt;div class="container"&gt;
+      &lt;input id="taglist" name="taglist" class="taglist" 
+        value="JavaScript jQuery tags editor" style="display:none" /&gt;
+   &lt;/div&gt; 
  
-  &lt;script type="text/javascript"&gt;
-    $('div.taglist').taglist(['The first tag', 'The second tag', 'Third tags a charm', 'Even more tags']);
-  &lt;/script&gt;
+   &lt;script type="text/javascript"&gt;
+     options = {};
+     tags = []
+     $('input.taglist').taglist(tags, options)
+   &lt;/script&gt;
 </pre>
 <h2>License</h2>
-<p>MIT License, http://www.opensource.org/licenses/mit-license.php
-</p>
+<p>MIT License, http://www.opensource.org/licenses/mit-license.php</p>
 <h2>Authors</h2>
-<p>Jeff Rafter (jeff@socialrange.org)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Jeff Rafter (jeff@socialrange.org)<br/>      </p>
+<p>Jeff Rafter (jeff@socialrange.org)<br /><br /></p>
 
+<h2>Download</h2>
+<p>
+  You can download this project in either
+  <a href="http://github.com/jeffrafter/jquery.taglist/zipball/master">zip</a> or
+  <a href="http://github.com/jeffrafter/jquery.taglist/tarball/master">tar</a> formats.
+</p>
+<p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+  by running:
+</p>
+<pre>$ git clone git://github.com/jeffrafter/jquery.taglist</pre>
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/jeffrafter/jquery.taglist/zipball/master">zip</a> or
-      <a href="http://github.com/jeffrafter/jquery.taglist/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/jeffrafter/jquery.taglist</pre>
-    </p>
+<div class="footer">
+  get the source code on GitHub : <a href="http://github.com/jeffrafter/jquery.taglist">jeffrafter/jquery.taglist</a>
+</div>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/jeffrafter/jquery.taglist">jeffrafter/jquery.taglist</a>
-    </div>
-
-  </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script src="https://github.com/jeffrafter/jquery.taglist/raw/master/jquery.taglist.js"></script>
-  <script>
-      jQuery(document).ready(function($) {
-        $('div.taglist').taglist(['The first tag', 'The second tag', 
-          'Third tags a charm', 'Even more tags']);
-      })
-  </script>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="https://github.com/jeffrafter/jquery.taglist/raw/master/jquery.taglist.js"></script>
+<script>
+  jQuery(document).ready(function($) {
+    $('input.taglist').taglist([], {});
+  })
+</script>
 
 
   
