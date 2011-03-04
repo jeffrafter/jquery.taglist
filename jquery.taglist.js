@@ -64,6 +64,7 @@
 
     var self          = this;
     var tags          = [];
+    var nodes         = [];
     var base          = $(base);
     var container     = $("<div></div>");
     var inputSpan     = $("<span class='taginput'><input type='" + options.inputType +"'></span>");
@@ -162,10 +163,12 @@
       tags.push(tag);
       var el = $("<a class='" + 
         options.className + "' href='" + 
-        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + tag +"'>"+
+        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + 
+        tag.replace(/&/g, '&amp;').replace(/\s/g,'&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\'/g, '&apos;').replace(/\"/g, '&quot;') +"'>"+
         "<span class='tagclose'>&#x2715;</span>"+
         "<span class='tagname'>"+tag+"</span>"+
         "</a><span> </span>").insertBefore(input);
+      nodes.push(el);
       // Check for ellipsis adjustment
       var elided = 0;
       var abbrev = tag;
@@ -191,7 +194,8 @@
       tag = tag.replace(/^\s*/, '').replace(/\s*$/, '');
       if (tag == '') return;
       if (tags.indexOf(tag) == -1) return;
-      var el = container.find('a[title='+tag+']').remove();
+      var el = nodes[tags.indexOf(tag)];
+      el.remove();
       tags.splice(tags.indexOf(tag), 1);
       if (options.delimiter)
         base.val(tags.join(options.delimiter));
