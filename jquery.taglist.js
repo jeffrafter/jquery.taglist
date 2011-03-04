@@ -197,6 +197,7 @@
       var el = nodes[tags.indexOf(tag)];
       el.remove();
       tags.splice(tags.indexOf(tag), 1);
+      nodes.splice(tags.indexOf(tag), 1);
       if (options.delimiter)
         base.val(tags.join(options.delimiter));
       else
