@@ -6,7 +6,7 @@
       body {
         font-family:HelveticaNeue,Helvetica,Arial,sans-serif;
       }
-      #taglist {
+      .taglist {
         width: 430px;
         height: 200px;
         border: 1px solid silver;
@@ -17,10 +17,10 @@
   <body>
 
     <h1>Taglist (for jQuery)</h1>
-    <div id="taglist" class="taglist" data-tags=""></div>
+    <input id="taglist" name="taglist" class="taglist" value="This is a very cool set of cool tags" style="display:none" />
 
     <pre>
- * version: 0.1 (3/1/2010)
+ * version: 0.3 (3/3/2010)
  * @requires jQuery v1.4 or later
  *
  * Examples at http://jeffrafter.github.com/jquery.taglist
@@ -37,17 +37,14 @@
  * Usage:
  *
  *  &lt;div class="container"&gt;
- *     &lt;div class="taglist"&gt;&lt;/div&gt;
- *   &lt;/div&gt; 
+ *     &lt;input id="taglist" name="taglist" class="taglist" value="This is a very cool set of cool tags" style="display:none" /&gt;
+ *  &lt;/div&gt; 
  *
  *  &lt;script type="text/javascript"&gt;
- *    $('div.taglist').taglist([], {
- *      className: 'tag', // default: tag
- *      onAdd: function(tag) {},
- *      onRemove: function(tag) {},
- *      onProcess: function(tag) {}
- *    })
- *   &lt;/script&gt;
+ *    options = {};
+ *    tags = []
+ *    $('input.taglist').taglist(tags, options)
+ *  &lt;/script&gt;
  *
  * Available options:
  *
@@ -57,13 +54,17 @@
  *
  *   inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
  *
+ *   keyCodes: a list of key codes that trigger tag processing. For example, [188, 0] are the keyCodes for "," and " " respectively
+ *
+ *   delimiter: the default tag delimiter (" " by default). This will be used when splitting and building up the input value.
+ *
  </pre>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="./jquery.taglist.js?1=1"></script>
     <script>
       jQuery(document).ready(function($) {
-        $('div.taglist').taglist(['The first tag', 'The second tag', 'Third tags a charm', 'Even more tags']);
+        $('input.taglist').taglist([], {});
       })
     </script>
   </body>

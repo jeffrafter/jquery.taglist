@@ -17,16 +17,13 @@
  * Usage:
  *
  *  <div class="container">
-      <div class="taglist"></div>
+      < class="taglist"></div>
  *  </div> 
  *
  *  <script type="text/javascript">
- *    $('div.taglist').taglist([], {
- *      className: 'tag', // default: tag
- *      onAdd: function(tag) {},
- *      onRemove: function(tag) {},
- *      onProcess: function(tag) {}
- *    })
+ *    options = {};
+ *    tags = [];
+ *    $('input.taglist').taglist(tags, options)
  *  </script>
  *
  * Available options:
@@ -39,25 +36,29 @@
  *
  *   keyCodes: a list of key codes that trigger tag processing. For example, [188, 0] are the keyCodes for "," and " " respectively
  *
+ *   delimiter: the default tag delimiter (" " by default). This will be used when splitting and building up the input value.
+ *
  */
 (function($) {
   var defaults = {
     className: 'tag',
     inputType: 'text',
+    prefixUrl: null,
+    keyCodes: [188, 32],
+    delimiter: ' ',
     onAdd: null,
     onRemove: null,
-    onProcess: null,
-    prefixUrl: null,
-    keyCodes: [188, 32]
+    onProcess: null
   };
 
-  var Taglist = function(container, userTags, userOptions) {
+  var Taglist = function(base, userTags, userOptions) {
     var options = {};
     $.extend(options, defaults, userOptions);
 
     var self          = this;
     var tags          = [];
-    var container     = $(container);
+    var base          = $(base);
+    var container     = $("<div></div>");
     var inputSpan     = $("<span class='taginput'><input type='" + options.inputType +"'></span>");
     var inputMaxWidth = 0;
     var inputComfort  = 20; // Must be > width of a single char or you get jitter
@@ -67,8 +68,11 @@
     var tagTest       = null;
 
     var init = function() {
+      base.hide();
       container.empty().append(input);
+      container.attr('class', base.attr('class'));
       container.click(function() { input.focus() });
+      base.after(container);
 
       // Based on http://jsbin.com/ahaxe
       inputMaxWidth = container.width();
@@ -84,9 +88,9 @@
         whiteSpace: 'nowrap'
       });
 
-      $.each(userTags, function(i, t) {
-        self.addTag(t);
-      });
+      userTags = userTags || [];
+      userTags.push(base.val());
+      $.each(userTags, function(i, t) { self.processTag(t) });
 
       inputCheck = function() {
         if (inputVal === (inputVal = input.val())) {return;}
@@ -168,6 +172,7 @@
       el.find('span.tagclose').click(function(event) {
         self.removeTag(el.attr('title'));
       });
+      base.val(tags.join(options.delimiter));
       if (options.onAdd) options.onAdd.apply(self, [tag]);
       return el;
     };
@@ -178,14 +183,23 @@
       if (tags.indexOf(tag) == -1) return;
       var el = container.find('a[title='+tag+']').remove();
       tags.splice(tags.indexOf(tag), 1);
+      base.val(tags.join(options.delimiter));
       if (options.onRemove) options.onRemove.apply(self, [tag]);
       return el;
     };
 
     this.processTag = function(tag) {
-      if (options.onProcess) return options.onProcess.apply(self, [tag]);
-      return self.addTag(tag);
+      if (options.onProcess) 
+        options.onProcess.apply(self, [tag]);
+      else {
+        var all = tag.split(options.delimiter);
+        for(var i=0; i<all.length; i++) this.addTag(all[i]);
+      }
     }
+
+    // Quick access
+    this.base = base;
+    this.tags = tags;
 
     // Get things started
     init();
@@ -193,8 +207,8 @@
   };
 
   $.fn.taglist = function(tags, options) {
-    $.each(this, function(i, e) {
-      e.taglist = new Taglist(e, tags, options);
+    this.filter('input:text').each(function() {
+      this.taglist = new Taglist(this, tags, options);
     });
     return this;
   };
