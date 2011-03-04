@@ -26,6 +26,24 @@ Usage:
     $('input.taglist').taglist(tags, options)
   </script>
  
+Advanced:
+
+  If you want to have long tags (with spaces) you can simply set the keyCodes and delimiter options to
+  be empty and jquery.taglist will insert a JSON version of the tags into the value:
+
+  $('input.taglist').taglist([], {keyCodes: null, delimiter: null})
+
+  Additionally, jquery.taglist has several callbacks for you to handle things how you want:
+
+  $('input.taglist').taglist([], {
+    onAdd: function(tag) {},
+    onRemove: function(tag) {},
+    onProcess: function(tag) {}
+  })
+
+  The process callback is useful for implementing validation or custom splitting logic. If included,
+  the default processor (which adds the tag) will not be called. So be sure to call this.addTag(tag).
+
 Available options:
  
    className: the class that should be used for each new tag in the list

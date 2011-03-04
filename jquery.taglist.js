@@ -26,6 +26,13 @@
  *    $('input.taglist').taglist(tags, options)
  *  </script>
  *
+ * Advanced:
+ *
+ *   If you want to have long tags (with spaces) you can simply set the keyCodes and delimiter options to
+ *   be empty and jquery.taglist will insert a JSON version of the tags into the value:
+ *
+ *    $('input.taglist').taglist([], {keyCodes: null, delimiter: null})
+ *
  * Available options:
  *
  *   className: the class that should be used for each new tag in the list
@@ -172,7 +179,10 @@
       el.find('span.tagclose').click(function(event) {
         self.removeTag(el.attr('title'));
       });
-      base.val(tags.join(options.delimiter));
+      if (options.delimiter)
+        base.val(tags.join(options.delimiter));
+      else
+        base.val(JSON.stringify(tags));
       if (options.onAdd) options.onAdd.apply(self, [tag]);
       return el;
     };
@@ -183,7 +193,10 @@
       if (tags.indexOf(tag) == -1) return;
       var el = container.find('a[title='+tag+']').remove();
       tags.splice(tags.indexOf(tag), 1);
-      base.val(tags.join(options.delimiter));
+      if (options.delimiter)
+        base.val(tags.join(options.delimiter));
+      else
+        base.val(JSON.stringify(tags));
       if (options.onRemove) options.onRemove.apply(self, [tag]);
       return el;
     };
