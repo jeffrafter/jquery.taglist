@@ -1,6 +1,6 @@
 
 Taglist (for jQuery)
-version: 0.1 (3/1/2010)
+version: 0.3 (3/3/2010)
 @requires jQuery v1.4 or later
 
 Examples at http://jeffrafter.github.com/jquery.taglist
@@ -16,25 +16,26 @@ Makes an editable taglist that adds items as blocks
 
 Usage:
 
- <div class="container">
-   <div class="taglist"></div>
- </div> 
-
- <script type="text/javascript">
-   $('div.taglist').taglist([], {
-     className: 'tag', // default: tag
-     onAdd: function(tag) {},
-     onRemove: function(tag) {},
-     onProcess: function(tag) {}
-   })
- </script>
-
+  <div class="container">
+    < class="taglist"></div>
+  </div> 
+ 
+  <script type="text/javascript">
+    options = {};
+    tags = [];
+    $('input.taglist').taglist(tags, options)
+  </script>
+ 
 Available options:
-
-  className: the class that should be used for each new tag in the list
-
-  prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
-
-  inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
-
-
+ 
+   className: the class that should be used for each new tag in the list
+ 
+   prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
+ 
+   inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
+ 
+   keyCodes: a list of key codes that trigger tag processing. For example, [188, 0] are the keyCodes for "," and " " respectively
+ 
+   delimiter: the default tag delimiter (" " by default). This will be used when splitting and building up the input value.
+ 
+ 
