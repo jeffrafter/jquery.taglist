@@ -1,6 +1,6 @@
 
 Taglist (for jQuery)
-version: 0.3 (3/3/2010)
+version: 0.4 (3/15/2010)
 @requires jQuery v1.4 or later
 
 Examples at http://jeffrafter.github.com/jquery.taglist
@@ -18,14 +18,14 @@ Usage:
 
   <div class="container">
     < class="taglist"></div>
-  </div> 
- 
+  </div>
+
   <script type="text/javascript">
     options = {};
     tags = [];
     $('input.taglist').taglist(tags, options)
   </script>
- 
+
 Advanced:
 
   If you want to have long tags (with spaces) you can simply set the keyCodes and delimiter options to
@@ -45,15 +45,15 @@ Advanced:
   the default processor (which adds the tag) will not be called. So be sure to call this.addTag(tag).
 
 Available options:
- 
+
    className: the class that should be used for each new tag in the list
- 
+
    prefixUrl: the base url inside of each tag href (the tag text is encoded and added)
- 
+
    inputType: overridable input type (default is "text"), so you can use HTML 5 style inputs
- 
+
    keyCodes: a list of key codes that trigger tag processing. For example, [188, 0] are the keyCodes for "," and " " respectively
- 
+
    delimiter: the default tag delimiter (" " by default). This will be used when splitting and building up the input value.
- 
- 
+
+
