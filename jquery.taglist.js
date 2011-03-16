@@ -1,6 +1,6 @@
 /*
  * Taglist (for jQuery)
- * version: 0.3 (3/3/2010)
+ * version: 0.4 (3/15/2010)
  * @requires jQuery v1.4 or later
  *
  * Examples at http://jeffrafter.github.com/jquery.taglist
@@ -18,7 +18,7 @@
  *
  *  <div class="container">
       < class="taglist"></div>
- *  </div> 
+ *  </div>
  *
  *  <script type="text/javascript">
  *    options = {};
@@ -161,9 +161,9 @@
       if (tag == '') return;
       if (tags.indexOf(tag) > -1) return;
       tags.push(tag);
-      var el = $("<a class='" + 
-        options.className + "' href='" + 
-        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" + 
+      var el = $("<a class='" +
+        options.className + "' href='" +
+        options.prefixUrl + encodeURIComponent(tag) + "' onclick='return false' title='" +
         tag.replace(/&/g, '&amp;').replace(/\s/g,'&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\'/g, '&apos;').replace(/\"/g, '&quot;') +"'>"+
         "<span class='tagclose'>&#x2715;</span>"+
         "<span class='tagname'>"+tag+"</span>"+
@@ -196,8 +196,8 @@
       if (tags.indexOf(tag) == -1) return;
       var el = nodes[tags.indexOf(tag)];
       el.remove();
-      tags.splice(tags.indexOf(tag), 1);
       nodes.splice(tags.indexOf(tag), 1);
+      tags.splice(tags.indexOf(tag), 1);
       if (options.delimiter)
         base.val(tags.join(options.delimiter));
       else
@@ -207,7 +207,7 @@
     };
 
     this.processTag = function(tag) {
-      if (options.onProcess) 
+      if (options.onProcess)
         options.onProcess.apply(self, [tag]);
       else {
         var all = tag.split(options.delimiter);
